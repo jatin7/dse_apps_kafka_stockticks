@@ -1,5 +1,6 @@
 mvn
 hugo
 setupSchema
+setupGraph
 producer
 consumer
