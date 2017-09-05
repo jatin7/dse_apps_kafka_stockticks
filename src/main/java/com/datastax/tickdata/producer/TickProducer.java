@@ -19,24 +19,32 @@ public class TickProducer {
 
     public static void main(String [] args) {
 
-        long events = Long.parseLong(PropertyHelper.getProperty("noOfTicks", "10"));
+        long events = Long.parseLong(PropertyHelper.getProperty("noOfTicks", "13"));
+        KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:9092");
         props.put("key.serializer", StringSerializer.class.getName());
         props.put("value.serializer", StringSerializer.class.getName());
         props.put("acks", "1");
-        KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
         TickGenerator generator = new TickGenerator(ExchangeUtils.getExchangeData());
 
-        for (long i= 0; i < events; i++) {
-            TickValue tickValueRandom = generator.getTickValueRandom();
-            String s = tickValueRandom.tickSymbol + ':' + tickValueRandom.value;
+        while (true) {
+
+            for (long i = 0; i < events; i++) {
+                TickValue tickValueRandom = generator.getTickValueRandom();
+                String s = tickValueRandom.tickSymbol + ':' + tickValueRandom.value;
+                try {
+                    producer.send(new ProducerRecord<String, String>(TOPIC, null, s));
+                } catch (Exception e) {
+                    log.error("Error adding to topic", e);
+                }
+            }
             try {
-                producer.send(new ProducerRecord<String, String>(TOPIC, null, s));
-            } catch (Exception e) {
-                log.error("Error adding to topic", e);
+                Thread.sleep(30000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
         producer.close();
