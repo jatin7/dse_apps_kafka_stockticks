@@ -15,6 +15,10 @@ Setup the Cassandra schema by running the SchemaSetup class.
 Modify as needed.
 
 ### Running
+Create the schema in DSE
+
+    mvn clean compile exec:java -Dexec.mainClass="com.datastax.demo.SchemaSetup"
+
 Start the TickProducer with the desired number of events.
 
     mvn clean compile exec:java -Dexec.mainClass="com.datastax.tickdata.producer.TickProducer"
