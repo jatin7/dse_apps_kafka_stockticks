@@ -24,7 +24,7 @@ public class TickConsumer {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String,String>(props);
 
         consumer.subscribe(Collections.singletonList(TickProducer.TOPIC));
-        TickDataDao dao = new TickDataDao(new String[]{"localhost"});
+        TickDataDao dao = new TickDataDao(new String[]{"10.200.179.212"});
         String [] split;
 
         try {
