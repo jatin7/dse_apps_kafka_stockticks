@@ -4,3 +4,4 @@ setupSchema
 setupGraph
 producer
 consumer
+join
