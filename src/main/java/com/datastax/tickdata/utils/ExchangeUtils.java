@@ -1,14 +1,17 @@
 package com.datastax.tickdata.utils;
 
-import com.datastax.tickdata.utils.TickData;
 import com.opencsv.CSVReader;
 import com.opencsv.ICSVParser;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ExchangeUtils {
 
@@ -16,9 +19,9 @@ public class ExchangeUtils {
 
     private static final CharSequence EXCHANGEDATA = "exchangedata";
 
-    public static List<String> getExchangeData() {
+    public static HashMap<String,Double> getExchangeData() {
 
-        List<String> allExchangeSymbols = new ArrayList<>();
+        HashMap<String, Double> allExchangeSymbols = new HashMap();
 
         // Process all the files from the csv directory
         File cvsDir = new File(".", "src/main/resources/csv");
@@ -32,7 +35,7 @@ public class ExchangeUtils {
         for (File file : files) {
             try {
                 if (file.getName().contains(EXCHANGEDATA)) {
-                    allExchangeSymbols.addAll(getExchangeData(file));
+                    allExchangeSymbols.putAll(getExchangeData(file));
                 }
 
             } catch (FileNotFoundException e) {
@@ -46,20 +49,20 @@ public class ExchangeUtils {
         return allExchangeSymbols;
     }
 
-    private static List<String> getExchangeData(File file) throws IOException, InterruptedException {
+    private static HashMap<String, Double> getExchangeData(File file) throws IOException, InterruptedException {
 
         CSVReader reader = new CSVReader(new FileReader(file.getAbsolutePath()), ICSVParser.DEFAULT_SEPARATOR,
                 ICSVParser.DEFAULT_QUOTE_CHARACTER, 1);
         String[] items = null;
-        List<String> exchangeItems = new ArrayList<>();
+        HashMap<String, Double> exchangeItems = new HashMap();
 
         List<TickData> list = new ArrayList<>();
 
         while ((items = reader.readNext()) != null) {
             String exchange = items[0].trim();
             String symbol = items[1].trim();
-
-            exchangeItems.add(exchange + "-" + symbol);
+            Double value = Double.valueOf(items[2]);
+            exchangeItems.put(exchange + "-" + symbol, value);
         }
 
         reader.close();

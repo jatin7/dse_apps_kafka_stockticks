@@ -1,13 +1,15 @@
 package com.datastax.tickdata.producer;
 
 import com.datastax.tickdata.utils.TickData;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TickGenerator {
 
@@ -17,11 +19,12 @@ public class TickGenerator {
 
     private List<TickValue> tickValueList = new ArrayList<TickValue>();
 
-    public TickGenerator(List<String> exchangeSymbols) {
+    public TickGenerator(HashMap<String,Double> exchangeSymbols) {
         int count = 1;
-        for (String symbol : exchangeSymbols) {
-
-            tickValueList.add(new TickValue(symbol, count++));
+        Iterator<Map.Entry<String, Double>> symbolIterator = exchangeSymbols.entrySet().iterator();
+        while (symbolIterator.hasNext()){
+            Map.Entry<String, Double> symbol = symbolIterator.next();
+            tickValueList.add(new TickValue(symbol.getKey(), symbol.getValue()));
         }
     }
 
