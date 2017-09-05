@@ -1,0 +1,5 @@
+mvn
+hugo
+setupSchema
+producer
+consumer
