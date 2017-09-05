@@ -17,7 +17,11 @@ Modify as needed.
 ### Running
 Start the TickProducer with the desired number of events.
 
+    mvn clean compile exec:java -Dexec.mainClass="com.datastax.tickdata.producer.TickProducer"
+
 Start the TickConsumer.
+
+    mvn clean compile exec:java -Dexec.mainClass="com.datastax.tickdata.producer.TickConsumer"
 
 ### Verification
 You can run the following in `cqlsh`:
