@@ -87,9 +87,9 @@ public class TickGenerator {
         double percentMove = (Math.random() * 1.0) / 100;
 
         if (up < 1) {
-            lastValue -= percentMove*last_value;
+            lastValue -= percentMove*lastValue;
         } else {
-            lastValue += percentMove*last_value;
+            lastValue += percentMove*lastValue;
         }
 
         return lastValue;
