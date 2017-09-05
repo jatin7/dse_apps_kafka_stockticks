@@ -62,7 +62,7 @@ public class ExchangeUtils {
             String exchange = items[0].trim();
             String symbol = items[1].trim();
             Double value = Double.valueOf(items[2]);
-            exchangeItems.put(exchange + "-" + symbol, value);
+            exchangeItems.put(symbol, value);
         }
 
         reader.close();
