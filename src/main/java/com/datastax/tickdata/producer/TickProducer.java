@@ -20,13 +20,19 @@ public class TickProducer {
     public static void main(String [] args) {
 
         long events = Long.parseLong(PropertyHelper.getProperty("noOfTicks", "13"));
-        KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:9092");
         props.put("key.serializer", StringSerializer.class.getName());
         props.put("value.serializer", StringSerializer.class.getName());
         props.put("acks", "1");
+
+        final KafkaProducer<String, String> producer = new KafkaProducer<>(props);
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                producer.close();
+            }
+        }, "Shutdown-thread"));
 
         TickGenerator generator = new TickGenerator(ExchangeUtils.getExchangeData());
 
@@ -47,6 +53,5 @@ public class TickProducer {
                 e.printStackTrace();
             }
         }
-        producer.close();
     }
 }
