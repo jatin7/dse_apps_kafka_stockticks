@@ -17,15 +17,15 @@ Modify as needed.
 ### Running
 Create the schema in DSE
 
-    mvn clean compile exec:java -Dexec.mainClass="com.datastax.demo.SchemaSetup"
+    mvn clean compile exec:java -Dexec.mainClass=com.datastax.utils.SchemaSetup
 
 Start the TickProducer with the desired number of events.
 
-    mvn clean compile exec:java -Dexec.mainClass="com.datastax.tickdata.producer.TickProducer"
+    mvn clean compile exec:java -Dexec.mainClass=com.datastax.tickdata.producer.TickProducer
 
 Start the TickConsumer.
 
-    mvn clean compile exec:java -Dexec.mainClass="com.datastax.tickdata.consumer.TickConsumer"
+    mvn clean compile exec:java -Dexec.mainClass=com.datastax.tickdata.consumer.TickConsumer
 
 ### Verification
 You can run the following in `cqlsh`:
