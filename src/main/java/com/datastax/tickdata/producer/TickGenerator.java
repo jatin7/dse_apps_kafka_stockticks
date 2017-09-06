@@ -38,7 +38,8 @@ public class TickGenerator {
 
         for (int i = 0; i < noOfTicks; i++) {
 
-            TickValue tickValue = getTickValueRandom();
+            // TickValue tickValue = getTickValueRandom(i);
+            TickValue tickValue = getTickValueRandom(i);
             flusher.add(new TickData(tickValue.tickSymbol, tickValue.value));
 
             TOTAL_TICKS++;
@@ -64,6 +65,13 @@ public class TickGenerator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+
+    TickValue getTickValueRandom(int i) {
+        TickValue tickValue = tickValueList.get(i);
+        tickValue.value = this.createRandomValue(tickValue.value);
+        return tickValue;
     }
 
 

@@ -19,7 +19,8 @@ public class TickProducer {
 
     public static void main(String [] args) {
 
-        long events = Long.parseLong(PropertyHelper.getProperty("noOfTicks", "13"));
+        long events = Long.parseLong(PropertyHelper.getProperty("noOfTicks", "14"));
+        //long events = Long.parseLong(PropertyHelper.getProperty("noOfTicks", "31"));
 
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:9092");
@@ -38,8 +39,8 @@ public class TickProducer {
 
         while (true) {
 
-            for (long i = 0; i < events; i++) {
-                TickValue tickValueRandom = generator.getTickValueRandom();
+            for (int i = 0; i < events-1; i++) {
+                TickValue tickValueRandom = generator.getTickValueRandom(i);
                 String s = tickValueRandom.tickSymbol + ':' + tickValueRandom.value;
                 try {
                     producer.send(new ProducerRecord<String, String>(TOPIC, null, s));
