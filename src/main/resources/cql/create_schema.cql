@@ -9,5 +9,10 @@ CREATE TABLE tick_data (
 	PRIMARY KEY (symbol, date)
 ) WITH CLUSTERING ORDER BY (date DESC);
 
+CREATE TABLE tick_data.last_tick_data (
+    symbol text PRIMARY KEY,
+    date timestamp,
+    value double
+)
 
 truncate tick_data;
