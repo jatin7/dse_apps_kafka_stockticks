@@ -4,13 +4,11 @@ echo "standing up docs"
 #standup the docs
 #install hugo
 mkdir /opt
-mkdir /opt/hugo
-wget -P /tmp/ https://github.com/spf13/hugo/releases/download/v0.20.2/hugo_0.20.2_Linux-64bit.tar.gz
-tar -xvf /tmp/hugo_0.20.2_Linux-64bit.tar.gz -C /opt/hugo
+sudo mkdir /opt/hugo
+wget -P /tmp/ https://github.com/gohugoio/hugo/releases/download/v0.26/hugo_0.26_Linux-64bit.tar.gz
+sudo tar -xvf /tmp/hugo_0.26_Linux-64bit.tar.gz -C /opt/hugo
 
 git submodule update --init
 git submodule sync
-/opt/hugo/hugo_0.20.2_linux_amd64/hugo_0.20.2_linux_amd64
-
-#python 2.7 specific
-cd ./public && python -m SimpleHTTPServer 1313&
+cd docsrc 
+/opt/hugo/hugo serve --bind 0.0.0.0 &

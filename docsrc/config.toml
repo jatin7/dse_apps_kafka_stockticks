@@ -1,4 +1,3 @@
-baseURL = "http://docs.engineblock.io/"
 languageCode = "en-us"
 title = "Streaming Graph Stockticks"
 theme = "hugo-material-docs"
