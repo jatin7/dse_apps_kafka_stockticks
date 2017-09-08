@@ -1,0 +1,39 @@
+baseURL = "http://docs.engineblock.io/"
+languageCode = "en-us"
+title = "Streaming Graph Stockticks"
+theme = "hugo-material-docs"
+metadataformat = "yaml"
+canonifyurls = true
+
+[params]
+	description = "DSE Graph and Streaming Stockticks"
+
+	logo = "images/engineblock_128.png"
+	favicon = "/images/engineblock_32.png"
+
+[params.palette]
+    primary = "grey"
+    accent  = "teal"
+
+[params.font]
+    text = "Roboto"
+    code = "Roboto Mono"
+
+[social]
+	github  = "phact/dse-kafka-stockticks"
+
+[blackfriday]
+	smartypants	= true
+	fractions = true
+	smartDashes = true
+	plainIDAnchors = true
+
+
+[[menu.main]]
+	name   = "DSE Graph Streaming Stockticks"
+	url    = "/"
+	weight = 10
+[[menu.main]]
+    name   = "Build and Run"
+    url    = "buildandrun/"
+    weight = 100
