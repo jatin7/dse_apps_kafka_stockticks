@@ -7,8 +7,8 @@ canonifyurls = true
 [params]
 	description = "DSE Graph and Streaming Stockticks"
 
-	logo = "images/engineblock_128.png"
-	favicon = "/images/engineblock_32.png"
+	logo = "images/asset-hub.svg"
+	favicon = "/images/asset-hub.png"
 
 [params.palette]
     primary = "grey"
