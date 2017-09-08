@@ -1,4 +1,6 @@
 #!/bin/bash
+IP=$(ifconfig | awk '/inet/ { print $2 }' | egrep -v '^fe|^127|^192|^172|::' | head -1)
+IP=${IP#addr:}
 
 echo "standing up docs"
 #standup the docs
@@ -11,4 +13,4 @@ sudo tar -xvf /tmp/hugo_0.26_Linux-64bit.tar.gz -C /opt/hugo
 git submodule update --init
 git submodule sync
 cd docsrc 
-/opt/hugo/hugo serve --bind 0.0.0.0 &
+/opt/hugo/hugo serve --bind 0.0.0.0  --appendPort  --baseUrl "http://${IP}/" &
