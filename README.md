@@ -17,7 +17,7 @@ Modify as needed.
 ### Running
 Create the schema in DSE
 
-    mvn clean compile exec:java -Dexec.mainClass=com.datastax.utils.SchemaSetup
+    mvn clean compile exec:java -Dexec.mainClass=com.datastax.tickdata.utils.SchemaSetup
 
 Start the TickProducer with the desired number of events.
 
