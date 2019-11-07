@@ -1,8 +1,6 @@
 # DSE Kafka Stockticks
 
-Borrowed heavily from [Patrick Callaghan's datastax-kafka-example](https://github.com/PatrickCallaghan/datastax-kafka-example).
-
-The goal of this version is to have a producer generate stock tick data and write to the `tick-stream` topic and then
+The goal of this sample is to have a producer generate stock tick data and write to the `tick-stream` topic and then
 have a consumer read from the topic and write the tick data to a Cassandra table.
 
 ### Setup
@@ -33,3 +31,4 @@ You can run the following in `cqlsh`:
 ```$xslt
 select * from datastax_tickdata_demo.tick_data ;
 ```
+Reference: [Patrick Callaghan's datastax-kafka-example](https://github.com/PatrickCallaghan/datastax-kafka-example).
